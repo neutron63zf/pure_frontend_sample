@@ -14,7 +14,9 @@ import {
 } from 'app/constants'
 
 export interface TodoAppProps extends RouteComponentProps<any> {
-  /** MobX Stores will be injected via @inject() **/
+  /*
+    MobX Stores will be injected via @inject()
+  */
   // [STORE_ROUTER]: RouterStore;
   // [STOURE_TODO]: TodoStore;
 }
@@ -42,9 +44,9 @@ export class TodoApp extends React.Component<TodoAppProps, TodoAppState> {
   checkLocationChange() {
     const router = this.props[STORE_ROUTER] as RouterStore
     const filter = Object.keys(TODO_FILTER_LOCATION_HASH)
-      .map((key) => Number(key) as TodoFilter)
+      .map(key => Number(key) as TodoFilter)
       .find(
-        (filter) => TODO_FILTER_LOCATION_HASH[filter] === router.location.hash
+        filter => TODO_FILTER_LOCATION_HASH[filter] === router.location.hash
       )
     this.setState({ filter })
   }

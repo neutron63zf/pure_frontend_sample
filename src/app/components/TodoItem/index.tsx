@@ -61,7 +61,7 @@ export class TodoItem extends React.Component<TodoProps, TodoState> {
       <TodoTextInput
         text={todo.text}
         editing={this.state.editing}
-        onSave={(text) => this.updateTodo({ text })}
+        onSave={text => this.updateTodo({ text })}
       />
     ) : (
       <div className={style.view}>

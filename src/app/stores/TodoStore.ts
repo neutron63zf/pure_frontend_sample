@@ -6,16 +6,17 @@ export class TodoStore {
     this.todos = fixtures
   }
 
-  @observable public todos: Array<TodoModel>
+  @observable
+  public todos: Array<TodoModel>
 
   @computed
   get activeTodos() {
-    return this.todos.filter((todo) => !todo.completed)
+    return this.todos.filter(todo => !todo.completed)
   }
 
   @computed
   get completedTodos() {
-    return this.todos.filter((todo) => todo.completed)
+    return this.todos.filter(todo => todo.completed)
   }
 
   @action
@@ -25,12 +26,12 @@ export class TodoStore {
 
   @action
   editTodo = (id: number, data: Partial<TodoModel>): void => {
-    this.todos = this.todos.map((todo) => {
+    this.todos = this.todos.map(todo => {
       if (todo.id === id) {
-        if (typeof data.completed == 'boolean') {
+        if (typeof data.completed === 'boolean') {
           todo.completed = data.completed
         }
-        if (typeof data.text == 'string') {
+        if (typeof data.text === 'string') {
           todo.text = data.text
         }
       }
@@ -40,17 +41,17 @@ export class TodoStore {
 
   @action
   deleteTodo = (id: number): void => {
-    this.todos = this.todos.filter((todo) => todo.id !== id)
+    this.todos = this.todos.filter(todo => todo.id !== id)
   }
 
   @action
   completeAll = (): void => {
-    this.todos = this.todos.map((todo) => ({ ...todo, completed: true }))
+    this.todos = this.todos.map(todo => ({ ...todo, completed: true }))
   }
 
   @action
   clearCompleted = (): void => {
-    this.todos = this.todos.filter((todo) => !todo.completed)
+    this.todos = this.todos.filter(todo => !todo.completed)
   }
 }
 

@@ -20,7 +20,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
   render() {
     return (
       <header>
-        <h1>Todos</h1>
+        <h1>Todos!</h1>
         <TodoTextInput
           newTodo
           onSave={this.handleSave}

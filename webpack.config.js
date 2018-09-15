@@ -34,6 +34,20 @@ module.exports = {
   },
   module: {
     rules: [
+      // enforce tslint
+      {
+        enforce: 'pre',
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'tslint-loader',
+            options: {
+              typeCheck: true,
+              fix: true,
+            }
+          }
+        ]
+      },
       // .ts, .tsx
       {
         test: /\.tsx?$/,
