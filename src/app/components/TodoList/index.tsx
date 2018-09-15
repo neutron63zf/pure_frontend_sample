@@ -1,28 +1,28 @@
-import * as React from 'react';
-import { TodoItem, TodoActions } from 'app/components/TodoItem';
-import { TodoModel } from 'app/models/TodoModel';
-import * as style from './style.css';
+import * as React from 'react'
+import { TodoItem, TodoActions } from 'app/components/TodoItem'
+import { TodoModel } from 'app/models/TodoModel'
+import * as style from './style.css'
 
 export interface TodoListProps extends TodoActions {
-  todos: TodoModel[];
-  completeAll: () => any;
+  todos: TodoModel[]
+  completeAll: () => any
 }
 
 export interface TodoListState {}
 
 export class TodoList extends React.Component<TodoListProps, TodoListState> {
   constructor(props?: TodoListProps, context?: any) {
-    super(props, context);
+    super(props, context)
   }
 
   private handleToggleAll = (e: React.SyntheticEvent<any>) => {
-    e.preventDefault();
-    this.props.completeAll();
-  };
+    e.preventDefault()
+    this.props.completeAll()
+  }
 
   renderToggleAll() {
-    const { todos } = this.props;
-    const completedCount = todos.length;
+    const { todos } = this.props
+    const completedCount = todos.length
     if (todos.length > 0) {
       return (
         <input
@@ -31,12 +31,12 @@ export class TodoList extends React.Component<TodoListProps, TodoListState> {
           checked={completedCount === todos.length}
           onChange={this.handleToggleAll}
         />
-      );
+      )
     }
   }
 
   render() {
-    const { todos, ...actions } = this.props;
+    const { todos, ...actions } = this.props
     return (
       <section className={style.main}>
         {this.renderToggleAll()}
@@ -46,8 +46,8 @@ export class TodoList extends React.Component<TodoListProps, TodoListState> {
           ))}
         </ul>
       </section>
-    );
+    )
   }
 }
 
-export default TodoList;
+export default TodoList

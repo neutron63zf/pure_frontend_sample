@@ -1,17 +1,17 @@
-import * as React from 'react';
-import * as classNames from 'classnames';
-import * as style from './style.css';
+import * as React from 'react'
+import * as classNames from 'classnames'
+import * as style from './style.css'
 
 export interface TodoTextInputProps {
-  text?: string;
-  placeholder?: string;
-  newTodo?: boolean;
-  editing?: boolean;
-  onSave: (text: string) => any;
+  text?: string
+  placeholder?: string
+  newTodo?: boolean
+  editing?: boolean
+  onSave: (text: string) => any
 }
 
 export interface TodoTextInputState {
-  text: string;
+  text: string
 }
 
 export class TodoTextInput extends React.Component<
@@ -19,32 +19,32 @@ export class TodoTextInput extends React.Component<
   TodoTextInputState
 > {
   constructor(props?: TodoTextInputProps, context?: any) {
-    super(props, context);
+    super(props, context)
     this.state = {
       text: this.props.text || ''
-    };
+    }
   }
 
   private handleSubmit = (e) => {
-    const text = e.target.value.trim();
+    const text = e.target.value.trim()
     if (e.which === 13) {
-      this.props.onSave(text);
+      this.props.onSave(text)
       if (this.props.newTodo) {
-        this.setState({ text: '' });
+        this.setState({ text: '' })
       }
     }
-  };
+  }
 
   private handleChange = (e) => {
-    this.setState({ text: e.target.value });
-  };
+    this.setState({ text: e.target.value })
+  }
 
   private handleBlur = (e) => {
-    const text = e.target.value.trim();
+    const text = e.target.value.trim()
     if (!this.props.newTodo) {
-      this.props.onSave(text);
+      this.props.onSave(text)
     }
-  };
+  }
 
   render() {
     const classes = classNames(
@@ -53,7 +53,7 @@ export class TodoTextInput extends React.Component<
         [style.new]: this.props.newTodo
       },
       style.normal
-    );
+    )
 
     return (
       <input
@@ -66,8 +66,8 @@ export class TodoTextInput extends React.Component<
         onChange={this.handleChange}
         onKeyDown={this.handleSubmit}
       />
-    );
+    )
   }
 }
 
-export default TodoTextInput;
+export default TodoTextInput
