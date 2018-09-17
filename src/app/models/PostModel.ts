@@ -1,6 +1,6 @@
 export interface PostInterface {
   username: string
-  timestamp: Date
+  timestamp: number
   content: string
 }
 export class PostModel implements PostInterface {

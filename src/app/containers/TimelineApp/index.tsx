@@ -37,9 +37,9 @@ export class TimelineApp extends React.Component<
       <div className={style.normal}>
         <AppHeader />
         {postStore.timeline.map(content => {
-          return <AppCard key={Number(content.timestamp)} content={content} />
+          return <AppCard key={content.timestamp} content={content} />
         })}
-        <PostForm username={'nkowne63!'} postTodo={postStore.addPost} />
+        <PostForm username={'anonymous'} postTodo={postStore.addPost} />
         {children}
       </div>
     )

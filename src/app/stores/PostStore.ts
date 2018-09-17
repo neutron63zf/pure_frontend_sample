@@ -1,9 +1,10 @@
 import { observable, action } from 'mobx'
-import { PostModel } from 'app/models'
+import { PostModel, FirebaseModel } from 'app/models'
 
 export class PostStore {
-  constructor(timeline: PostModel[]) {
+  constructor(timeline: PostModel[], private firebase?: FirebaseModel) {
     this.timeline = timeline
+    this.firebase.subscribePosts(this.updateStore)
   }
 
   @observable
@@ -11,7 +12,17 @@ export class PostStore {
 
   @action
   addPost = (item: Partial<PostModel>): void => {
-    this.timeline.push(new PostModel(item.username, new Date(), item.content))
+    const post = new PostModel(item.username, Number(new Date()), item.content)
+    this.timeline.push(post)
+    this.firebase.addPost(
+      Number(new Date()).toString(),
+      JSON.parse(JSON.stringify(post))
+    )
+  }
+
+  @action
+  updateStore = (docs: any[]): void => {
+    this.timeline = docs as PostModel[]
   }
 }
 
