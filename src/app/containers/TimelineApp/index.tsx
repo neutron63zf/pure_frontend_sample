@@ -5,27 +5,20 @@ import { RouteComponentProps } from 'react-router'
 import AppHeader from 'app/components/AppHeader'
 import AppCard from 'app/components/AppCard'
 import PostForm from 'app/components/PostForm'
-import PostModel from 'app/models/PostModel'
-import { STORE_ROUTER } from 'app/constants'
-
-const posts = [
-  {
-    username: 'nkowne63',
-    timestamp: new Date(),
-    content: '今日も疲れたー'
-  }
-] as PostModel[]
+import PostStore from 'app/stores/PostStore'
+import { STORE_ROUTER, STORE_POST } from 'app/constants'
 
 export interface TimelineAppProps extends RouteComponentProps<any> {
   /*
     MobX Stores will be injected via @inject()
   */
   // [STORE_ROUTER]: RouterStore;
+  // [STORE_POST]: PostStore;
 }
 
 export interface TimelineAppState {}
 
-@inject(STORE_ROUTER)
+@inject(STORE_ROUTER, STORE_POST)
 @observer
 export class TimelineApp extends React.Component<
   TimelineAppProps,
@@ -37,12 +30,13 @@ export class TimelineApp extends React.Component<
   }
 
   render() {
+    const { timeline } = this.props[STORE_POST] as PostStore
     const { children } = this.props
 
     return (
       <div className={style.normal}>
         <AppHeader />
-        {posts.map(content => {
+        {timeline.map(content => {
           return <AppCard key={Number(content.timestamp)} content={content} />
         })}
         <PostForm username={'nkowne63!'} />

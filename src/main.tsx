@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 import { useStrict } from 'mobx'
 import { Provider } from 'mobx-react'
 import { createBrowserHistory } from 'history'
-import { TodoModel } from 'app/models'
+import { TodoModel, PostModel } from 'app/models'
 import { createStores } from 'app/stores'
 import { App } from 'app'
 
@@ -16,9 +16,22 @@ const defaultTodos = [
   new TodoModel('Use React', true)
 ]
 
+const posts = [
+  {
+    username: 'nkowne63',
+    timestamp: new Date(),
+    content: '今日も疲れたー'
+  },
+  {
+    username: 'nkowne63',
+    timestamp: new Date(),
+    content: 'ゆっくり寝よう'
+  }
+] as PostModel[]
+
 // prepare MobX stores
 const history = createBrowserHistory()
-const rootStore = createStores(history, defaultTodos)
+const rootStore = createStores(history, defaultTodos, posts)
 
 // render react DOM
 ReactDOM.render(
