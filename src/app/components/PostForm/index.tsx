@@ -26,20 +26,22 @@ const styles = createStyles({
   }
 })
 
-interface PostFormProps extends Partial<WithStyles<typeof styles>> {}
+interface PostFormProps extends Partial<WithStyles<typeof styles>> {
+  username: string
+}
 
 interface PostFormState {}
 
 class PostForm extends React.Component<PostFormProps, PostFormState> {
   render() {
-    const { classes } = this.props
+    const { classes, username } = this.props
 
     return (
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.title} color="textSecondary" />
           <Typography variant="headline" component="h2">
-            username: nkowne63
+            username: {username}
           </Typography>
           <Typography className={classes.pos} color="textSecondary" />
           <TextField

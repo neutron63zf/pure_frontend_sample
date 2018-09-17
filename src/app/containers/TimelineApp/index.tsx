@@ -5,7 +5,16 @@ import { RouteComponentProps } from 'react-router'
 import AppHeader from 'app/components/AppHeader'
 import AppCard from 'app/components/AppCard'
 import PostForm from 'app/components/PostForm'
+import PostModel from 'app/models/PostModel'
 import { STORE_ROUTER } from 'app/constants'
+
+const posts = [
+  {
+    username: 'nkowne63',
+    timestamp: new Date(),
+    content: '今日も疲れたー'
+  }
+] as PostModel[]
 
 export interface TimelineAppProps extends RouteComponentProps<any> {
   /*
@@ -33,8 +42,10 @@ export class TimelineApp extends React.Component<
     return (
       <div className={style.normal}>
         <AppHeader />
-        <AppCard />
-        <PostForm />
+        {posts.map(content => {
+          return <AppCard key={Number(content.timestamp)} content={content} />
+        })}
+        <PostForm username={'nkowne63!'} />
         {children}
       </div>
     )
