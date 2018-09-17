@@ -24,7 +24,7 @@ const posts = [
   },
   {
     username: 'nkowne63',
-    timestamp: new Date(),
+    timestamp: new Date(Number(new Date()) + 1),
     content: 'ゆっくり寝よう'
   }
 ] as PostModel[]

@@ -8,6 +8,7 @@ import {
   TextField,
   Typography
 } from '@material-ui/core'
+import { PostModel } from 'app/models'
 
 const styles = createStyles({
   card: {
@@ -28,13 +29,42 @@ const styles = createStyles({
 
 interface PostFormProps extends Partial<WithStyles<typeof styles>> {
   username: string
+  postTodo: (content: Partial<PostModel>) => any
 }
 
-interface PostFormState {}
+interface PostFormState {
+  content: string
+}
 
 class PostForm extends React.Component<PostFormProps, PostFormState> {
+  constructor(props?: PostFormProps, context?: any) {
+    super(props, context)
+    this.state = {
+      content: ''
+    }
+  }
+
+  // arrow funcにしないとthis参照が狂って死ぬ
+  private handleChange = event => {
+    const preContent = event.target.value
+    this.setState({
+      content: preContent
+    })
+  }
+
+  private postTodo = _ => {
+    const content = this.state.content
+    if (content.length > 0) {
+      this.props.postTodo({
+        username: this.props.username,
+        content
+      })
+    }
+  }
+
   render() {
     const { classes, username } = this.props
+    const { content } = this.state
 
     return (
       <Card className={classes.card}>
@@ -49,10 +79,14 @@ class PostForm extends React.Component<PostFormProps, PostFormState> {
             label="投稿する内容"
             multiline
             className={classes.textField}
+            onChange={this.handleChange}
+            value={content}
           />
         </CardContent>
         <CardActions>
-          <Button size="small">投稿する</Button>
+          <Button size="small" onClick={this.postTodo}>
+            投稿する
+          </Button>
         </CardActions>
       </Card>
     )
