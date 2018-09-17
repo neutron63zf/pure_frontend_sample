@@ -1,3 +1,4 @@
 import TodoModel from './TodoModel'
+import PostModel from './PostModel'
 
-export { TodoModel }
+export { TodoModel, PostModel }
