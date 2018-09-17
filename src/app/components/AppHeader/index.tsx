@@ -11,13 +11,13 @@ const styles = createStyles({
   }
 })
 
-interface AppHeaderProps extends WithStyles<typeof styles> {}
+interface AppHeaderProps extends Partial<WithStyles<typeof styles>> {}
 
 interface AppHeaderState {}
 
-class AppHeader extends React.Component<any, AppHeaderState> {
+class AppHeader extends React.Component<AppHeaderProps, AppHeaderState> {
   render() {
-    const { classes } = this.props as AppHeaderProps
+    const { classes } = this.props
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">

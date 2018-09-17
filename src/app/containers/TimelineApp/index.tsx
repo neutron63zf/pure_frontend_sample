@@ -3,6 +3,7 @@ import * as style from './style.css'
 import { inject, observer } from 'mobx-react'
 import { RouteComponentProps } from 'react-router'
 import AppHeader from 'app/components/AppHeader'
+import AppCard from 'app/components/AppCard'
 import { STORE_ROUTER } from 'app/constants'
 
 export interface TimelineAppProps extends RouteComponentProps<any> {
@@ -31,6 +32,7 @@ export class TimelineApp extends React.Component<
     return (
       <div className={style.normal}>
         <AppHeader />
+        <AppCard />
         {children}
       </div>
     )
