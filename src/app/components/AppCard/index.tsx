@@ -3,12 +3,12 @@ import { withStyles, WithStyles, createStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 
 const styles = createStyles({
   card: {
-    minWidth: 275
+    minWidth: 275,
+    margin: 15
   },
   bullet: {
     display: 'inline-block',
@@ -31,33 +31,20 @@ interface AppCardState {}
 class AppCard extends React.Component<AppCardProps, AppCardState> {
   render() {
     const { classes } = this.props
-    const bull = <span className={classes.bullet}>•</span>
 
     return (
       <Card className={classes.card}>
         <CardContent>
-          <Typography className={classes.title} color="textSecondary">
-            Word of the Day
-          </Typography>
+          <Typography className={classes.title} color="textSecondary" />
           <Typography variant="headline" component="h2">
-            be
-            {bull}
-            nev
-            {bull}o{bull}
-            lent
+            username: nkowne63
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
-            adjective
+            timestamp: today
           </Typography>
-          <Typography component="p">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
+          <Typography component="p">今日も疲れたー</Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
+        <CardActions />
       </Card>
     )
   }
