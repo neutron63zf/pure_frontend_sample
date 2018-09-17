@@ -2,6 +2,7 @@ import * as React from 'react'
 import * as style from './style.css'
 import { inject, observer } from 'mobx-react'
 import { RouteComponentProps } from 'react-router'
+import AppHeader from 'app/components/AppHeader'
 import { STORE_ROUTER } from 'app/constants'
 
 export interface TimelineAppProps extends RouteComponentProps<any> {
@@ -27,6 +28,11 @@ export class TimelineApp extends React.Component<
   render() {
     const { children } = this.props
 
-    return <div className={style.normal}>{children}</div>
+    return (
+      <div className={style.normal}>
+        <AppHeader />
+        {children}
+      </div>
+    )
   }
 }
