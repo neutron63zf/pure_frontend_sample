@@ -59,6 +59,9 @@ class PostForm extends React.Component<PostFormProps, PostFormState> {
         username: this.props.username,
         content
       })
+      this.setState({
+        content: ''
+      })
     }
   }
 

@@ -5,10 +5,18 @@ import { Provider } from 'mobx-react'
 import { createBrowserHistory } from 'history'
 import { TodoModel, PostModel } from 'app/models'
 import { createStores } from 'app/stores'
+import firebase from 'firebase/app'
 import { App } from 'app'
 
 // enable MobX strict mode
 useStrict(true)
+
+// firebase settings
+const config = {
+  apiKey: 'AIzaSyBi_uoqa-e2yUohz1fGYkporWY6DOyuKB8',
+  authDomain: 'purefrontsamleapp.firebaseapp.com'
+}
+firebase.initializeApp(config)
 
 // default fixtures for TodoStore
 const defaultTodos = [

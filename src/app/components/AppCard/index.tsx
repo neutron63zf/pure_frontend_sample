@@ -38,7 +38,8 @@ class AppCard extends React.Component<AppCardProps, AppCardState> {
             username: {content.username}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
-            timestamp: {content.timestamp.toLocaleDateString()}
+            timestamp: {content.timestamp.toLocaleDateString()}{' '}
+            {content.timestamp.toLocaleTimeString()}
           </Typography>
           <Typography component="p">{content.content}</Typography>
         </CardContent>
