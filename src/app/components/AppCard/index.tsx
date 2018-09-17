@@ -10,11 +10,6 @@ const styles = createStyles({
     minWidth: 275,
     margin: 15
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)'
-  },
   title: {
     marginBottom: 16,
     fontSize: 14

@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react'
 import { RouteComponentProps } from 'react-router'
 import AppHeader from 'app/components/AppHeader'
 import AppCard from 'app/components/AppCard'
+import PostForm from 'app/components/PostForm'
 import { STORE_ROUTER } from 'app/constants'
 
 export interface TimelineAppProps extends RouteComponentProps<any> {
@@ -33,6 +34,7 @@ export class TimelineApp extends React.Component<
       <div className={style.normal}>
         <AppHeader />
         <AppCard />
+        <PostForm />
         {children}
       </div>
     )
