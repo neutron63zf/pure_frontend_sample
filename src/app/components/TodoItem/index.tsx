@@ -2,6 +2,7 @@ import * as React from 'react'
 import * as classNames from 'classnames'
 import { TodoTextInput } from 'app/components/TodoTextInput'
 import { TodoModel } from 'app/models/TodoModel'
+import Card from '@material-ui/core/Card'
 import * as style from './style.css'
 
 export interface TodoActions {
@@ -64,21 +65,23 @@ export class TodoItem extends React.Component<TodoProps, TodoState> {
         onSave={text => this.updateTodo({ text })}
       />
     ) : (
-      <div className={style.view}>
-        <input
-          className={style.toggle}
-          type="checkbox"
-          checked={todo.completed}
-          onChange={this.handleToggleCheckbox}
-        />
+      <Card>
+        <div className={style.view}>
+          <input
+            className={style.toggle}
+            type="checkbox"
+            checked={todo.completed}
+            onChange={this.handleToggleCheckbox}
+          />
 
-        <label onDoubleClick={this.handleDoubleClick}>{todo.text}</label>
+          <label onDoubleClick={this.handleDoubleClick}>{todo.text}</label>
 
-        <button
-          className={style.destroy}
-          onClick={this.handleClickDeleteButton}
-        />
-      </div>
+          <button
+            className={style.destroy}
+            onClick={this.handleClickDeleteButton}
+          />
+        </div>
+      </Card>
     )
 
     const classes = classNames({
