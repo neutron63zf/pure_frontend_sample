@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 import { useStrict } from 'mobx'
 import { Provider } from 'mobx-react'
 import { createBrowserHistory } from 'history'
-import { TodoModel, PostModel, FirebaseModel } from 'app/models'
+import { TodoModel, FirebaseModel } from 'app/models'
 import { FirebaseRepository } from 'app/models/firebaseRepository'
 import { createStores } from 'app/stores'
 import firebase from 'firebase/app'
@@ -27,25 +27,12 @@ const defaultTodos = [
   new TodoModel('Use React', true)
 ]
 
-const posts = [
-  {
-    username: 'nkowne63',
-    timestamp: Number(new Date()),
-    content: '今日も疲れたー'
-  },
-  {
-    username: 'nkowne63',
-    timestamp: Number(new Date(Number(new Date()) + 1)),
-    content: 'ゆっくり寝よう'
-  }
-] as PostModel[]
-
 // prepare MobX stores
 const history = createBrowserHistory()
 const rootStore = createStores(
   history,
   defaultTodos,
-  posts,
+  [],
   new FirebaseModel(new FirebaseRepository(firebase))
 )
 
