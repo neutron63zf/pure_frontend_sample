@@ -10,6 +10,8 @@ var outPath = path.join(__dirname, './dist');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+var writeFilePluign = require('write-file-webpack-plugin');
 
 module.exports = {
   context: sourcePath,
@@ -119,7 +121,11 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: 'assets/index.html'
-    })
+    }),
+    new CopyWebpackPlugin([
+      'assets/manifest.json'
+    ]),
+    new writeFilePluign()
   ],
   devServer: {
     contentBase: sourcePath,
