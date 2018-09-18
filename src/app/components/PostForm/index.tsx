@@ -9,6 +9,8 @@ import {
   Typography
 } from '@material-ui/core'
 import { PostModel } from 'app/models'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 const styles = createStyles({
   card: {
@@ -28,19 +30,22 @@ const styles = createStyles({
 })
 
 interface PostFormProps extends Partial<WithStyles<typeof styles>> {
-  username: string
   postTodo: (content: Partial<PostModel>) => any
 }
 
 interface PostFormState {
+  isLoggedIn: boolean
   content: string
+  username: string
 }
 
 class PostForm extends React.Component<PostFormProps, PostFormState> {
   constructor(props?: PostFormProps, context?: any) {
     super(props, context)
     this.state = {
-      content: ''
+      isLoggedIn: false,
+      content: '',
+      username: 'anonymous'
     }
   }
 
@@ -56,7 +61,7 @@ class PostForm extends React.Component<PostFormProps, PostFormState> {
     const content = this.state.content
     if (content.length > 0) {
       this.props.postTodo({
-        username: this.props.username,
+        username: this.state.username,
         content
       })
       this.setState({
@@ -65,9 +70,34 @@ class PostForm extends React.Component<PostFormProps, PostFormState> {
     }
   }
 
+  private login = async _ => {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    // provider.addScope('https://www.googleapis.com/auth/contacts.readonly')
+    let result
+    try {
+      result = await firebase.auth().signInWithPopup(provider)
+    } catch (error) {
+      console.error('login', error)
+      return
+    }
+    const { user } = result
+    this.setState({
+      username: user.displayName,
+      isLoggedIn: true
+    })
+  }
+
   render() {
-    const { classes, username } = this.props
-    const { content } = this.state
+    const { classes } = this.props
+    const { content, username, isLoggedIn } = this.state
+
+    const loginButton = !isLoggedIn ? (
+      <Button size="small" onClick={this.login}>
+        ログイン
+      </Button>
+    ) : (
+      undefined
+    )
 
     return (
       <Card className={classes.card}>
@@ -90,6 +120,7 @@ class PostForm extends React.Component<PostFormProps, PostFormState> {
           <Button size="small" onClick={this.postTodo}>
             投稿する
           </Button>
+          {loginButton}
         </CardActions>
       </Card>
     )

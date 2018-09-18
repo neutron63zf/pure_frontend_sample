@@ -11,13 +11,18 @@ export class PostStore {
   public timeline: PostModel[]
 
   @action
-  addPost = (item: Partial<PostModel>): void => {
+  addPost = async (item: Partial<PostModel>): Promise<any> => {
     const post = new PostModel(item.username, Number(new Date()), item.content)
     this.timeline.push(post)
-    this.firebase.addPost(
-      Number(new Date()).toString(),
-      JSON.parse(JSON.stringify(post))
-    )
+    try {
+      return this.firebase.addPost(
+        Number(new Date()).toString(),
+        JSON.parse(JSON.stringify(post))
+      )
+    } catch (error) {
+      console.error(error)
+      return
+    }
   }
 
   @action
