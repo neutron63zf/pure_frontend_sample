@@ -11,7 +11,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var writeFilePluign = require('write-file-webpack-plugin');
+var HtmlReplaceWebpackPlugin = require('html-replace-webpack-plugin')
 
 module.exports = {
   context: sourcePath,
@@ -123,9 +123,18 @@ module.exports = {
       template: 'assets/index.html'
     }),
     new CopyWebpackPlugin([
-      'assets/manifest.json'
+      'assets/manifest.json',
+      'assets/sw.js',
+      'assets/launcher-icon-1x.png',
+      'assets/launcher-icon-3x.png',
+      'assets/launcher-icon-4x.png'
     ]),
-    new writeFilePluign()
+    new HtmlReplaceWebpackPlugin([
+      {
+        pattern: '<!--manifest-->',
+        replacement: '<link rel="manifest" href="./manifest.json" />'
+      }
+    ])
   ],
   devServer: {
     contentBase: sourcePath,

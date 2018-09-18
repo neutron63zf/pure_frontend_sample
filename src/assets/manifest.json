@@ -1,3 +1,23 @@
 {
-  "test": false
+  "short_name": "SimpleTimeline",
+  "name": "SimpleTimeline",
+  "icons": [
+    {
+      "src": "launcher-icon-1x.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "launcher-icon-3x.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "launcher-icon-4x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "display": "standalone",
+  "start_url": "https://purefrontsamleapp.firebaseapp.com/"
 }
